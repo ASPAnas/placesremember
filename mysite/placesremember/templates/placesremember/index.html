@@ -14,7 +14,8 @@
     <script scr="http://127.0.0.1:8887/jquery.min.js"></script>
     <script>
         $.ajax({
-            url: 'https://api.vk.com/method/account.getProfileInfo?first_name&last_name&fields=photo_200&access_token=a53f9979e97791abf0130416e00991c1cc22c6348b24eaf3cde3ba1a5e82fb5baa89a71a68f739306504a&v=5.131',
+            url: 'https://api.vk.com/method/account.getProfileInfo?&first_name&last_name&access_token=a53f9979e97791abf0130416e00991c1cc22c6348b24eaf3cde3ba1a5e82fb5baa89a71a68f739306504a&v=5.131',
+            url: 'https://api.vk.com/method/users.get?&fields=photo_200&access_token=a53f9979e97791abf0130416e00991c1cc22c6348b24eaf3cde3ba1a5e82fb5baa89a71a68f739306504a&v=5.131',
             method: 'GET',
             dataType: 'JSONP',
             success: function (data) {
