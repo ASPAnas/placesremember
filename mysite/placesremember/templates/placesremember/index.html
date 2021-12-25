@@ -18,7 +18,8 @@
         $('#logv').on('click',logvk);
         function getUrl(method, params){
             params = params || {};
-            params['access token'] = 'a53f9979e97791abf0130416e00991c1cc22c6348b24eaf3cde3ba1a5e82fb5baa89a71a68f739306504a';
+            params['access_token'] = '334c3122f1dc1578a02a4fb37dc76e7d266108eb7ceddc215c9105700c33303e948433f516be825b4291e';
+            params['v'] = '5.131';
             return 'https://api.vk.com/method/' + method + '?' + $.param(params);}
 
 
@@ -31,8 +32,9 @@
              });
         }
         function logvk(){
-            sendRequest('account.getProfileInfo',{field:'first_name', field:'second_name'}, function (data){
+            sendRequest('users.get',{fields: 'photo_200'}, function (data){
                 console.log(data);
+                console.log(resp.response[0].photo_200);
             });
         }
 
