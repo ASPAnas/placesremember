@@ -9,26 +9,32 @@
 <body>
     <h1>Places Remember</h1>
     <h2>С помощью данного приложения вы можете создавать заметки о посещённых вами местах. Для этого вам необходимо авторизоваться:</h2>
-    <h3>Войти с помощью</h3>
+    <button id="logv">Войти в помощью ВК</button>
+    <ul></ul>
 
     <script scr="http://127.0.0.1:8887/jquery.min.js"></script>
     <script>
 
+        $('#logv').on('click',logvk);
         function getUrl(method, params){
             params = params || {};
-            params['access token'] = 'a53f9979e97791abf0130416e00991c1cc22c6348b24eaf3cde3ba1a5e82fb5baa89a71a68f739306504a' ;
-            return 'https://api.vk.com/method/' + method + ? + $.param(params);
-        function getUrl(params){
-            return 'https://api.vk.com/method/' + method + ? + $.param(params);
-        $.ajax({
-            url: getUrl1('account.getInfo',{'first_name', 'second_name'}),
-            url2: getUrl2('users.get'{'photo_200'}),
-            method: 'GET',
-            dataType: 'JSONP',
-            success: function (data) {
+            params['access token'] = 'a53f9979e97791abf0130416e00991c1cc22c6348b24eaf3cde3ba1a5e82fb5baa89a71a68f739306504a';
+            return 'https://api.vk.com/method/' + method + '?' + $.param(params);}
+
+
+        function sendRequest(method, params, func){
+            $.ajax({
+                url: getUrl(method, params),
+                method: 'GET',
+                dataType: 'JSONP',
+                success: func
+             });
+        }
+        function logvk(){
+            sendRequest('account.getProfileInfo',{field:'first_name', field:'second_name'}, function (data){
                 console.log(data);
-            }
-        });
+            });
+        }
 
     </script>
 
