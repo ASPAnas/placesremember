@@ -9,8 +9,9 @@
 <body>
     <h1>Places Remember</h1>
     <h2>С помощью данного приложения вы можете создавать заметки о посещённых вами местах. Для этого вам необходимо авторизоваться:</h2>
-    <button id="logv">Войти в помощью ВК</button>
+    <button id="logv">Войти с помощью ВК</button>
     <ul></ul>
+
 
     <script scr="http://127.0.0.1:8887/jquery.min.js"></script>
     <script>
@@ -32,11 +33,24 @@
              });
         }
         function logvk(){
-            sendRequest('users.get',{fields: 'photo_200'}, function (data){
-                console.log(data);
-                console.log(resp.response[0].photo_200);
+            sendRequest('users.get',{fields: 'photo_200', fields: 'uid'}, function (data){
+                drawinfo(data.response);
             });
         }
+
+        function drawinfo(users){
+            var html =
+                '<li>'+
+                '<a target="_blank" href="vk.com/id'+ users.uid + '">'
+                + '<img scr="'+users.photo_200+'" />'
+                   + '<div>'
+                            +'<h4>' + users.first_name + ' ' + users.last_name + '</h4>'
+                            + '<button>Добавить воспоминание</button>'
+                            + '</div>'
+                            + '</a>'
+                            + '</>li>'
+
+            $('ul').html(html)}
 
     </script>
 
