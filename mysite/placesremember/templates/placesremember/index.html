@@ -10,7 +10,7 @@
     <h1>Places Remember</h1>
     <h2>С помощью данного приложения вы можете создавать заметки о посещённых вами местах. Для этого вам необходимо авторизоваться:</h2>
     <button id="logv">Войти с помощью ВК</button>
-    <ul></ul>
+    <p></p>
 
 
     <script scr="http://127.0.0.1:8887/jquery.min.js"></script>
@@ -40,7 +40,7 @@
 
         function drawinfo(users){
             var html =
-                '<li>'+
+                '<a>'+
                 '<a target="_blank" href="vk.com/id'+ users.uid + '">'
                 + '<img scr="'+users.photo_200+'" />'
                    + '<div>'
@@ -48,9 +48,9 @@
                             + '<button>Добавить воспоминание</button>'
                             + '</div>'
                             + '</a>'
-                            + '</li>'
+                            + '</a>'
 
-            $('ul').html(html)}
+            $('p').html(html)}
 
     </script>
 
