@@ -6,54 +6,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Храните свои впечатления о посещённых местах</title>
 </head>
+    <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
 <body>
     <h1>Places Remember</h1>
     <h2>С помощью данного приложения вы можете создавать заметки о посещённых вами местах. Для этого вам необходимо авторизоваться:</h2>
     <button id="logv">Войти с помощью ВК</button>
-    <p></p>
-
-
-    <script scr="http://127.0.0.1:8887/jquery.min.js"></script>
-    <script>
-
-        $('#logv').on('click',logvk);
-        function getUrl(method, params){
-            params = params || {};
-            params['access_token'] = '334c3122f1dc1578a02a4fb37dc76e7d266108eb7ceddc215c9105700c33303e948433f516be825b4291e';
-            params['v'] = '5.131';
-            return 'https://api.vk.com/method/' + method + '?' + $.param(params);}
-
-
-        function sendRequest(method, params, func){
-            $.ajax({
-                url: getUrl(method, params),
-                method: 'GET',
-                dataType: 'JSONP',
-                success: func
-             });
-        }
-        function logvk(){
-            sendRequest('users.get',{fields: 'photo_200', fields: 'uid'}, function (data){
-                drawinfo(data.response);
-            });
-        }
-
-        function drawinfo(users){
-            var html =
-                '<a>'+
-                '<a target="_blank" href="vk.com/id'+ users.uid + '">'
-                + '<img scr="'+users.photo_200+'" />'
-                   + '<div>'
-                            +'<h4>' + users.first_name + ' ' + users.last_name + '</h4>'
-                            + '<button>Добавить воспоминание</button>'
-                            + '</div>'
-                            + '</a>'
-                            + '</a>'
-
-            $('p').html(html)}
-
+    <script type="text/javascript">
+    VK.init({
+        apiId: 8034656
+    });
     </script>
-
+    <div id="vk_auth"></div>
+    <script type="text/javascript">
+    VK.Widgets.Auth('vk_auth', {});
+</script>
+</script>
 
 </body>
 </html>
