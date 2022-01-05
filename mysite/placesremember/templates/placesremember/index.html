@@ -11,11 +11,15 @@
     <h1>Places Remember</h1>
     <h2>С помощью данного приложения вы можете создавать заметки о посещённых вами местах. Для этого вам необходимо авторизоваться:</h2>
     <input id="button" type="button" value="Войти с помощью ВК">
+    <input id="button2" type="button" value="Войти с помощью FB">
 
 
-
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v12.0&appId=614046346517210&autoLogAppEvents=1" nonce="tSRxZyFY"></script>
+    <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
 
     <script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
+
 
     <script type="text/javascript">
         window.name = 'fXD';
@@ -34,5 +38,45 @@
     (window.open('https://oauth.vk.com/authorize?client_id=8034656&display=page&redirect_uri=http://127.0.0.1:80/placesremember&scope=friends&response_type=token&v=5.131&state=123456'));
   };
 </script>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '{your-app-id}',
+      cookie     : true,
+      xfbml      : true,
+      version    : '{api-version}'
+    });
+
+    FB.AppEvents.logPageView();
+
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+FB.getLoginStatus(function(response) {
+    statusChangeCallback(response);
+});
+
+{
+    status: 'connected',
+    authResponse: {
+        accessToken: '...',
+        expiresIn:'...',
+        signedRequest:'...',
+        userID:'...'
+    }
+  }
+
+
+
+</script>
+
 </body>
 </html>
