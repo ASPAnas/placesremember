@@ -8,6 +8,7 @@ urlpatterns = [
     path('', index, name='home'),
     path('placesremember', index, name='placesremember'),
     path('addnew/', addnew, name='addnew'),
-    path('auth', autho, name='auth')
+    path('auth', autho, name='auth'),
+    path('https://localhost:63342/', index, name='places')
 
 ]

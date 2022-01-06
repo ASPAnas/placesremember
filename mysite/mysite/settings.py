@@ -26,6 +26,7 @@ SECRET_KEY = 'django-insecure-hlr%ehbmar2d%)jt_t+=yhcf19l(rf6b8_9augx)tc86=hbb09
 DEBUG = True
 
 ALLOWED_HOSTS = []
+SOCIAL_AUTH_REDIRECT = True
 
 
 # Application definition
