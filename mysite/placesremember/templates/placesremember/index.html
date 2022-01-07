@@ -2,24 +2,22 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+
     <title>Храните свои впечатления о посещённых местах</title>
 </head>
 <script src="https://vk.com/js/api/openapi.js?169" type="text/javascript"></script>
 <script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+ <script scr="http://127.0.0.1:8887/jquery.min.js"></script>
 <body>
     <h1>Places Remember</h1>
     <h2>С помощью данного приложения вы можете создавать заметки о посещённых вами местах. Для этого вам необходимо авторизоваться:</h2>
     <input id="button" type="button" value="Войти с помощью ВК">
-    <input id="button2" type="button" value="Войти с помощью FB">
-
-
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v12.0&appId=614046346517210&autoLogAppEvents=1" nonce="tSRxZyFY"></script>
-    <div class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-layout="default" data-auto-logout-link="false" data-use-continue-as="false"></div>
+    <button id="load">показать инфо</button>
 
     <script src="https://vk.com/js/api/xd_connection.js?2"  type="text/javascript"></script>
      <script scr="http://127.0.0.1:8887/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
 
 
     <script type="text/javascript">
@@ -29,86 +27,37 @@
                 console.log('init success');
             }, function() {
                 console.log('init error');
-  }, '5.63');
-};
-    $('#logv').on('click',logvk);
-    function logvk(){
-        VK.callMethod("showSettingsBox", 8214);}
+  }, '5.63');};
+
+
 
   button.onclick = function() {
     (window.open('https://oauth.vk.com/authorize?client_id=8034656&display=page&redirect_uri=http://127.0.0.1:80/placesremember&scope=friends&response_type=token&v=5.131&state=123456'));
 
-     };
 
-  function getUserProfileData(uid) {
-    var code;
-    code = 'return {'
-    code += 'me: API.getProfiles({uids: "' + uid + '", fields: "first_name, last_name, nickname, bdate"})[0]';
-    code += '};';
-    VK.Api.call('execute', { 'code': code }, getUserProfileDataCallback);
-}
+};
 
-function getUserProfileDataCallback(data) {
-    data.response.me.first_name; // имя
-    data.response.me.last_name;  // фамилия
-    data.response.me.nickname;   // никнейм
-    data.response.me.bdate;      // дата рождения
-}
+$('#load').on('click', LoadInfo)
+function getUrl(method, params){
+            params = params || {};
+            params['access token'] = 'b43e76fca55a2e97cb9d70dcfe3bc5d1ed60a861e86b06372f0294c8af79618c2e2a2c452e163058c55f2' ;
+            return 'https://api.vk.com/method/' + method + '?' + $.param(params);};
 
+ function sendRequest(method, params, func){
+     $.ajax({
+                url: getUrl(method, params),
+                method: 'GET',
+                dataType: 'JSONP',
+                success: func
+            });
+};
 
+function LoadInfo(){
+    sendRequest('users.get',{fields: 'photo_id'}),
+    function (data) {
+                    console.log(data);
+                }
+};
 </script>
-<script>
- function statusChangeCallback(response) {  // Called with the results from FB.getLoginStatus().
-    console.log('statusChangeCallback');
-    console.log('response');                   // The current login status of the person.
-    if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-      testAPI();
-    } else {                                 // Not logged into your webpage or we are unable to tell.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this webpage.';
-    }
-  }
-
-
-  function checkLoginState() {               // Called when a person is finished with the Login Button.
-    FB.getLoginStatus(function(response) {   // See the onlogin handler
-      statusChangeCallback(response);
-    });
-  }
-
-
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '614046346517210',
-      cookie     : true,                     // Enable cookies to allow the server to access the session.
-      xfbml      : true,                     // Parse social plugins on this webpage.
-      version    : '12.0'           // Use this Graph API version for this call.
-    });
-
-
-    FB.getLoginStatus(function(response) {   // Called after the JS SDK has been initialized.
-      statusChangeCallback(response);        // Returns the login status.
-    });
-  };
-
-  function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-      console.log('Successful login for: ' + response.name);
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    });
-  }
-</script>
-<!-- The JS SDK Login Button -->
-
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<div id="status">
-</div>
-
-<!-- Load the JS SDK asynchronously -->
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
 </body>
 </html>
